@@ -26,8 +26,10 @@ int patternSize;
 // init lock variable to prevent race conditions
 pthread_mutex_t lock;
 
+// suppress "no return" warning
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wreturn-type"
 int main(int argc, char *argv[]) {
-
 	// first argument is the pattern string
 	pattern = argv[1];
 	patternSize = strlen(pattern);
@@ -37,7 +39,8 @@ int main(int argc, char *argv[]) {
 	// allocate space for the text array and read the text characters into it
 	text = (char *)malloc(textSize + 1);
 	int n = 0;
-	// then read characters from the standard input, storing them in the text array 		until either an EOF is found or the array has been filled
+	// then read characters from the standard input, storing them in the text array 
+	// until either an EOF is found or the array has been filled
 	while (n < textSize) {
 		int status = scanf("%c", &text[n]);
 		n++;
@@ -80,7 +83,8 @@ void *searcher(void *arg) {
 
 		// pick an unexamined starting position
         int h = threadNext;
-		// repeat until either the pattern is found (by this thread or another one), 			// or there are no more unexamined starting positions
+		// repeat until either the pattern is found (by this thread or another one),
+		// or there are no more unexamined starting positions
 		if (location >= 0 || threadNext > textSize-patternSize) {
 				pthread_mutex_unlock(&lock);
 			    break;
@@ -109,3 +113,4 @@ void *searcher(void *arg) {
 	   pthread_mutex_unlock(&lock); 
 	}
 }
+#pragma GCC diagnostic pop

@@ -4,7 +4,7 @@ Search text entered in the command line for a given string using multiple thread
 
 ### Initialization
 
-After compilation, run search.c with two arguments. These arguments are a query string that will be found in the main text and the size of the main text array, respectively. The main text can either be ported from a .txt file using the `<` command or entered into the command line as standard input after initializing  search. Lastly, enter `ctrl-d` when finished entering text.
+After compilation, run search.c with two arguments. These arguments are a query string that will be found in the main text and the minimum size of the main text array, respectively. The main text can either be ported from a .txt file using the `<` command or entered into the command line as standard input after initializing  search. Enter `ctrl-d` when finished entering text.
 
 ### Note
 
